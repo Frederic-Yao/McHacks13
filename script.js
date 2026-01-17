@@ -82,23 +82,23 @@ function moveRope(amount) {
 }
 
 function updateVisuals() {
-  // 1. Move the Clash Point (Explosion)
+  // 1. Move the Clash Point
   clashPoint.style.left = ropePosition + "px";
 
-  // 2. Calculate Beam Widths
-  // "80" is the offset we defined in CSS for the wand tip (left: 80px)
-  const wandOffset = 80; 
-  
-  // Left Beam connects Wand to Clash Point
-  // Math: Current Position - Wand Offset
-  let leftWidth = ropePosition - wandOffset;
+  // 2. Define Offsets (MUST MATCH CSS 'left' and 'right' of beams)
+  const leftWandOffset = 80;  // Matches CSS #beamLeft { left: 80px }
+  const rightWandOffset = 80; // Matches CSS #beamRight { right: 80px }
+  const containerWidth = 700; // Matches CSS #gameContainer { width: 700px }
+
+  // 3. Calculate Left Beam Width
+  // Distance from Left Wand -> Clash Point
+  let leftWidth = ropePosition - leftWandOffset;
   if (leftWidth < 0) leftWidth = 0;
   beamLeft.style.width = leftWidth + "px";
 
-  // Right Beam connects Right Wand to Clash Point
-  // Math: Total Width (700) - Current Position - Wand Offset
-  // Note: 700 is the width of #gameContainer in your CSS
-  let rightWidth = (700 - ropePosition) - wandOffset;
+  // 4. Calculate Right Beam Width
+  // Distance from Right Wand -> Clash Point
+  let rightWidth = (containerWidth - ropePosition) - rightWandOffset;
   if (rightWidth < 0) rightWidth = 0;
   beamRight.style.width = rightWidth + "px";
 }

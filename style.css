@@ -76,43 +76,72 @@ h1 {
 }
 
 /* Beams */
+/* --- BEAM SETTINGS --- */
+
 #beamLeft {
   position: absolute;
-  height: 20px; /* Thickness of beam */
-  background: red; /* Replace with: url('red-beam.png') repeat-x */
-  box-shadow: 0 0 10px red; /* Glow effect */
+  height: 90px; 
+  /* Use the red beam image */
+  background-image: url('red-beam.png');
+  background-repeat: repeat-x;
+  background-position: center left;
+  background-size: contain; 
   
-  /* Anchor to Left Character */
-  left: 80px;  /* Adjust this to match where the wand tip is */
-  top: 65px;   /* Adjust to vertical center of wand */
-  width: 0px;  /* JS will control this */
+  /* ALIGNMENT FOR PLAYER (Left) */
+  /* The player sprite is 100px tall. The wand is roughly 60% down. */
+  top: 46px;   
+  /* The player starts at 10px left. The wand tip is roughly 70px wide. */
+  left: 110px;  
+  
+  width: 0px; 
   z-index: 5;
-  transform-origin: left center;
 }
 
 #beamRight {
   position: absolute;
-  height: 20px;
-  background: green; /* Replace with: url('green-beam.png') repeat-x */
-  box-shadow: 0 0 10px green; /* Glow effect */
+  height: 90px;
+  /* Use the green beam image */
+  background-image: url('green-beam.png');
+  background-repeat: repeat-x;
+  background-position: center right;
+  background-size: contain;
+
+  /* ALIGNMENT FOR COMPUTER (Right) */
+  /* The computer sprite is 100px tall. The wand is higher up, around 45% down. */
+  top: 46px;
+  /* The computer starts at 10px from right. Wand tip extends inward. */
+  right: 110px; 
   
-  /* Anchor to Right Character */
-  right: 80px; /* Adjust this to match where the wand tip is */
-  top: 65px;
-  width: 0px;  /* JS will control this */
+  width: 0px; 
   z-index: 5;
-  transform-origin: right center;
 }
 
 /* The Clash Explosion */
 #clashPoint {
+  /* 1. FORCE VISIBILITY */
   position: absolute;
-  width: 80px;
-  height: 80px;
-  top: 35px; /* Center vertically over beams */
-  left: 325px;
-  transform: translateX(-50%); /* Keeps the center of the image on the exact coordinate */
-  z-index: 20;
+  background-color: #fff; /* White center is REQUIRED for it to be seen */
+  z-index: 100; /* Super high value ensures it sits on top of beams */
+
+  /* 2. SIZE (Updated to be larger as requested) */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* Makes it a circle */
+
+  /* 3. POSITIONING */
+  left: 325px;       /* Starts in the middle */
+  /* Center vertically in the 150px container: (150 - 100) / 2 = 25px */
+  top: 25px;         
+  transform: translateX(-50%); /* Keeps it centered on the coordinate */
+
+  /* 4. GLOW EFFECTS (The "Explosion" look) */
+  box-shadow: 
+    0 0 20px #ff00de,  /* Inner purple/pink glow */
+    0 0 40px #00d4ff,  /* Outer cyan glow */
+    0 0 80px white;    /* Distant bright light */
+    
+  /* 5. ANIMATION */
+  animation: pulse 0.2s infinite alternate;
 }
 
 /* Words */
@@ -180,4 +209,10 @@ h1 {
 
 .tooltip:hover .tooltip-text {
   visibility: visible;
+}
+
+/* Add this animation definition at the bottom of your CSS if you don't have it */
+@keyframes pulse {
+  from { transform: translateX(-50%) scale(1); }
+  to { transform: translateX(-50%) scale(1.2); }
 }
