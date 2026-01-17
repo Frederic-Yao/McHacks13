@@ -86,8 +86,8 @@ function updateVisuals() {
   clashPoint.style.left = ropePosition + "px";
 
   // 2. Define Offsets (MUST MATCH CSS 'left' and 'right' of beams)
-  const leftWandOffset = 80;  // Matches CSS #beamLeft { left: 80px }
-  const rightWandOffset = 80; // Matches CSS #beamRight { right: 80px }
+  const leftWandOffset = 110;  // Matches CSS #beamLeft { left: 80px }
+  const rightWandOffset = 110; // Matches CSS #beamRight { right: 80px }
   const containerWidth = 700; // Matches CSS #gameContainer { width: 700px }
 
   // 3. Calculate Left Beam Width
