@@ -12,9 +12,9 @@
 
   <!-- MENU -->
   <div id="menu">
-    <p class="difficulty">Select Difficulty:</p>
+    <p class="difficulty"><strong>Select Difficulty:</strong></p>
     <label class="option">
-      <input type="radio" name="difficulty" value="easy" checked>
+      <input type="radio" name="difficulty" value="easy">
       <span>Easy</span>
     </label>
     <label class="option">
@@ -26,16 +26,16 @@
 
     <p class="wordset"><strong>Select Word Set:</strong></p>
     <label class="wordset-option">
-      <input type="radio" name="wordset" value="normal" checked>
-      <span class="tooltip">
-      The Muggle Tongue
+      <input type="radio" name="wordset" value="normal">
+      <span class="tooltip no-animate">
+      Muggle Tongue
       <span class="tooltip-text"><i>The everyday language of non-magical humans.
       </i></span>
       </span>
     </label>
     <label class="wordset-option">
       <input type="radio" name="wordset" value="harry">
-      <span class="tooltip">
+      <span class="tooltip no-animate">
       The Spellbook of Words
       <span class="tooltip-text">
         <i>A magical dictionary of spells and words.<i>
@@ -63,9 +63,6 @@
       <div id="beamRight"></div>
       <img id="clashPoint" src="./images/clash.gif" alt="Clash Animation">
       
-      <img id="explosionLeft" class="explosion hidden" src="./images/explosion.gif" />
-      <img id="explosionRight" class="explosion hidden" src="./images/explosion.gif" />
-
     </div>
 
     <div id="wordsRow">
@@ -82,12 +79,13 @@
 
     <p id="result"></p>
     <div id="endButtons" style="display:none">
-      <button id="playAgainBtn">Play Again</button>
+      <!-- <button id="playAgainBtn">Play Again</button> -->
       <button id="mainMenuBtn">Main Menu</button>
     </div>
 
 
   </div>
+  <script src="/socket.io/socket.io.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

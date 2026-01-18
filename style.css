@@ -81,7 +81,7 @@ h1 {
 
 .option input[type="radio"]:checked + span {
   color: #FFD700;
-  transform: scale(1.12);
+  transform: scale(1.12) !important;
   text-shadow:
   0 0 7px rgba(0,0,0,0.8),
   0 0 6px #FFD700,
@@ -113,7 +113,7 @@ h1 {
 
 .wordset-option input[type="radio"]:checked + span {
   color: #FFD700;
-  transform: scale(1.12);
+  transform: scale(1.12) !important;
   text-shadow:
   0 0 7px rgba(0,0,0,0.8),
   0 0 6px #FFD700,
@@ -121,31 +121,38 @@ h1 {
   0 0 20px rgba(255, 215, 0, 0.8)
 }
 
-
-p.difficulty, p.wordset {
+p.difficulty {
   text-align: center;
-  font-family: "HarryP", serif;
-  font-size: 32px;           /* Smaller than the options (56px) */
-  color: #bdc3c7;            /* A silver/grey color so it doesn't compete with the Gold */
-  letter-spacing: 4px;       /* Spaced out letters look more "premium" */
-  text-transform: uppercase; /* Makes it feel like a formal menu label */
-  margin-bottom: 10px;       /* Bring it closer to the options */
-  
-  /* Subtle glow that is different from the gold options */
+  font-size: 50px;
+  margin-top: 0px;
+  margin-bottom: 40px;
+  font-weight: normal;
+}
+
+p.difficulty strong {
+  font-weight: bold;
+}
+
+p.wordset {text-align: center;
+  font-size: 50px;                 
+  margin-top: 10px;                
+  margin-bottom: 30px;         
+  font-weight: bold;
+  color: #fff;                      
   text-shadow:
     0 0 10px rgba(0,0,0,0.8),     
     0 0 15px rgba(0,0,0,0.7),
-    0 0 20px rgba(0,0,0,0.6);; 
+    0 0 20px rgba(0,0,0,0.6);
 }
 
 p.difficulty::after, p.wordset::after {
   content: "";
   display: block;
-  width: 190px;
+  width: 190px;               /* Short line centered */
   height: 3px;
   background: linear-gradient(to right, transparent, #FFD700, transparent);
-  margin: 5px auto 0;
-  opacity: 0.6;
+  margin: 7px auto 0;        /* Center it and add space below */
+  opacity: 0.7;
 }
 
 /* --- Menu --- */
@@ -189,7 +196,6 @@ button:hover::after {
   filter: blur(18px);
   animation: pulseGlow 1.2s infinite alternate;
 }
-
 
 #menu button {
   margin-top: 20px;
@@ -378,8 +384,6 @@ button:hover::after {
   overflow: visible;        /* show all characters */
 }
 
-
-
 .tooltip {
   position: relative;
   cursor: help;
@@ -388,21 +392,61 @@ button:hover::after {
 .tooltip-text {
   visibility: hidden;
   width: 220px;
-  background-color: #333;
+  background: rgba(15, 15, 15, 0.95); /* Nearly black, slightly transparent */
   color: #fff;
   text-align: center;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid #FFD700;
+  border-radius: 4px;
+
+  box-shadow:
+    0 0 15px rgba(0,0,0,0.9),       
+    0 0 10px rgba(255, 215, 0, 0.4),
+    inset 0 0 15px rgba(255, 215, 0, 0.1);
+  
+  font-family: "HarryP", serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+  line-height: 1.2;
 
   position: absolute;
-  bottom: 125%;
-  left: 50%;
+  bottom: 135%;
+  left: 0%;
+  margin-left: 20px;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 1001;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  background-image: 
+    linear-gradient(to right, #FFD700 20px, transparent 20px),
+    linear-gradient(to bottom, #FFD700 20px, transparent 20px),
+    linear-gradient(to left, #FFD700 20px, transparent 20px),  
+    linear-gradient(to bottom, #FFD700 20px, transparent 20px),
+    linear-gradient(to right, #FFD700 20px, transparent 20px),
+    linear-gradient(to top, #FFD700 20px, transparent 20px),
+    linear-gradient(to left, #FFD700 20px, transparent 20px),
+    linear-gradient(to top, #FFD700 20px, transparent 20px);
+  background-repeat: no-repeat;
+  background-size: 100% 2px, 2px 100%, 100% 2px, 2px 100%;
+  background-position: 0 0, 0 0, 100% 0, 100% 0, 0 100%, 0 100%, 100% 100%, 100% 100%;
+}
+
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #FFD700 transparent transparent transparent;
 }
 
 .tooltip:hover .tooltip-text {
   visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY();
 }
 
 /* Add this animation definition at the bottom of your CSS if you don't have it */
@@ -435,16 +479,31 @@ button:hover::after {
 
 
 /* --- Fade & slide in animation --- */
+/* Initial slide in animation (translateY only) */
 @keyframes slideFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(50px); /* start slightly below */
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(50px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
+
+/* Option spans */
+.option span {
+  display: inline-block;
+  opacity: 0;
+  animation: slideFadeIn 0.8s forwards;
+  transition: transform 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Checked state only scales */
+.option input[type="radio"]:checked + span {
+  transform: scale(1.12); /* no translateY here */
+  color: #FFD700;
+  text-shadow:
+    0 0 7px rgba(0,0,0,0.8),
+    0 0 6px #FFD700,
+    0 0 12px #FFD700,
+    0 0 20px rgba(255, 215, 0, 0.8);
+}
+
 
 /* Apply animation to menu elements */
 #menu p.difficulty,
