@@ -57,10 +57,25 @@ h1 {
   z-index: 1000;
 }
 
-.option input[type="radio"] {
-  display: none;
+/* Menu: basic settingn for further customization */
+#menu {
+  text-align: center;
+  font-size: 30px;
 }
 
+#menu label {
+  margin: 0 10px;
+}
+
+/*Positions difficuty header*/
+p.difficulty {
+  text-align: center;
+  font-size: 50px;
+  margin-top: 0px;
+  margin-bottom: 40px;
+}
+
+/*Display different difficulties when unselected*/
 .option span {
   display: inline-block;
   margin: 10px 20px;
@@ -89,13 +104,27 @@ h1 {
   0 0 20px rgba(255, 215, 0, 0.8)
 }
 
-.wordset-option input[type="radio"] {
-  display: none;
+/*Position and style wordset header*/
+p.wordset {text-align: center;
+  font-size: 50px;                 
+  margin-top: 10px;                
+  margin-bottom: 30px;         
+  font-weight: bold;
+  color: #fff;                      
+  text-shadow:
+    0 0 10px rgba(0,0,0,0.8),     
+    0 0 15px rgba(0,0,0,0.7),
+    0 0 20px rgba(0,0,0,0.6);
 }
+
+/*Position word choice since one option is shorter than the other*/
 .wordset-option {
   position: relative;
   left: 30px; /* fine-tune */
 }
+
+
+/*Display two different banks of words*/
 .wordset-option span {
   display: inline-block;
   margin: 10px 20px;
@@ -124,30 +153,8 @@ h1 {
   0 0 20px rgba(255, 215, 0, 0.8)
 }
 
-p.difficulty {
-  text-align: center;
-  font-size: 50px;
-  margin-top: 0px;
-  margin-bottom: 40px;
-  font-weight: normal;
-}
 
-p.difficulty strong {
-  font-weight: bold;
-}
-
-p.wordset {text-align: center;
-  font-size: 50px;                 
-  margin-top: 10px;                
-  margin-bottom: 30px;         
-  font-weight: bold;
-  color: #fff;                      
-  text-shadow:
-    0 0 10px rgba(0,0,0,0.8),     
-    0 0 15px rgba(0,0,0,0.7),
-    0 0 20px rgba(0,0,0,0.6);
-}
-
+/*creating extra element/styling after the titles*/
 p.difficulty::after, p.wordset::after {
   content: "";
   display: block;
@@ -158,16 +165,8 @@ p.difficulty::after, p.wordset::after {
   opacity: 0.7;
 }
 
-/* --- Menu --- */
-#menu {
-  text-align: center;
-  font-size: 30px;
-}
 
-#menu label {
-  margin: 0 10px;
-}
-
+/* --- BUTTON STYLES --- */
 button {
   position: relative;
   padding: 10px 20px;
@@ -180,6 +179,7 @@ button {
   overflow: visible; 
 }
 
+/* Glow effect using ::after pseudo-element */
 button::after {
   content: '';
   position: absolute;
@@ -194,6 +194,7 @@ button::after {
   transition: all 0.3s ease;
 }
 
+/* Hover animationi of glowing */
 button:hover::after {
   opacity: 1;
   filter: blur(18px);
@@ -244,6 +245,25 @@ button:hover::after {
   right: 10px;
   height: 100px; /* Adjust to sprite size */
   z-index: 3;
+}
+
+#charLeftNoSpell {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  height: 100px; /* Adjust to sprite size */
+  z-index: 3;
+}
+#charRightNoSpell {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  height: 100px; /* Adjust to sprite size */
+  z-index: 3;
+}
+
+.hidden {
+  display: none;
 }
 
 /* Explosion */
@@ -585,4 +605,13 @@ button:hover::after {
 
 #menu button {
   animation-delay: 1s;
+}
+
+#countdown {
+  display: none;
+  font-size: 100px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+  
 }
