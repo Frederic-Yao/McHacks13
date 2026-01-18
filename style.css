@@ -8,7 +8,7 @@ body, button {
 }
 
 #currentWord, #upcomingWords, #typingInput {
-    font-family: Arial, sans-serif; /* fallback / readable font */
+    font-family: "Times New Roman", sans-serif; /* fallback / readable font */
 }
 
 body, h1, h2, h3, p, label {
@@ -22,7 +22,7 @@ body, h1, h2, h3, p, label {
 body {
   margin: 0;
   height: 100vh;
-  background-image: url("./images/background.jpg");
+  background-image: url("./background (1).gif");
   background-size: cover;        
   background-position: center;   
   background-repeat: no-repeat; 
