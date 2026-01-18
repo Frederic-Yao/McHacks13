@@ -338,7 +338,6 @@ button:hover::after {
   text-align: center;     /* center text inside input */
 }
 
-
 /* --- Letter Styles --- */
 .correct {
   color: rgb(41, 141, 207);
@@ -370,9 +369,10 @@ button:hover::after {
 
 /* --- Result Text --- */
 #result {
-  font-size: 28px;
+  font-size: 100px;
   font-weight: bold;
   margin-top: 20px;
+  margin-bottom: 0px
 }
 
 .tooltip {
