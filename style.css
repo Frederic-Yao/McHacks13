@@ -330,6 +330,16 @@ button:hover::after {
   justify-content: flex-start; /* so it doesn’t center based on text */
 }
 
+/* --- Countdown Number Styles --- */
+#countdown {
+  display: none;
+  font-size: 100px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+  
+}
+
 /* --------------- BATTLEFIELD  --------------- */
 #battlefield {
   width: 700px;
@@ -594,6 +604,11 @@ button:hover::after {
   margin-top: 10px;
 }
 
+/*makes the laser hidden during countdown and end screens*/
+.hidden-during-countdown {
+  display: none !important;
+}
+
 #end-buttons {
   display: flex;
   justify-content: center;   /* center horizontally */
@@ -618,25 +633,6 @@ button:hover::after {
 @keyframes slideFadeIn {
   0% { opacity: 0; transform: translateY(50px); }
   100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Option spans */
-.option span {
-  display: inline-block;
-  opacity: 0;
-  animation: slideFadeIn 0.8s forwards;
-  transition: transform 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
-}
-
-/* Checked state only scales */
-.option input[type="radio"]:checked + span {
-  transform: scale(1.12); /* no translateY here */
-  color: #FFD700;
-  text-shadow:
-    0 0 7px rgba(0,0,0,0.8),
-    0 0 6px #FFD700,
-    0 0 12px #FFD700,
-    0 0 20px rgba(255, 215, 0, 0.8);
 }
 
 
@@ -669,13 +665,4 @@ button:hover::after {
 
 #menu button {
   animation-delay: 1s;
-}
-
-#countdown {
-  display: none;
-  font-size: 100px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 30px;
-  
 }
