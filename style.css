@@ -39,19 +39,17 @@ h1 {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 80px;               /* make it big like a title */
-  color: #E6C200;                /* bright gold */
-  font-family: 'HarryP', serif;  /* fancy serif font, similar to HP style */
+  font-size: 80px;               
+  color: #E6C200;                
+  font-family: 'HarryP', serif;  
   text-align: center;
 
-  /* black outline + glowing gold inside */
   text-shadow:
-     -2px -2px 0 #000,   /* top-left outline */
-      3px -2px 0 #000,   /* top-right outline */
-     -2px  2px 0 #000,   /* bottom-left outline */
-      2px  2px 0 #000,   /* bottom-right outline */
-      0 0 8px #FFD700,   /* subtle inner glow */
-      0 0 15px #FFD700;  /* stronger outer glow */
+    0 0 10px rgba(0,0,0,1),
+    0 0 10px rgba(0,0,0,0.8),
+    0 0 6px #FFD700,
+    0 0 12px #FFD700,
+    0 0 20px rgba(255, 215, 0, 0.8);
 
   letter-spacing: 2px;            /* spreads letters a little for logo look */
   margin: 0;
@@ -69,21 +67,58 @@ h1 {
   font-size: 56px;
   color: #eee;
   cursor: pointer;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
   transition: transform 0.2s ease, text-shadow 0.2s ease, color 0.2s ease;
+}
+
+.option span:hover {
+  color: #FFD700;
+  text-shadow:
+    0 0 10px rgba(0,0,0,0.8),
+    0 0 6px #FFD700,
+    0 0 12px #FFD700;
 }
 
 .option input[type="radio"]:checked + span {
   color: #FFD700;
   transform: scale(1.12);
   text-shadow:
-    0 0 4px rgba(255, 215, 0, 0.8),
-    0 0 8px rgba(255, 215, 0, 0.5);
+  0 0 7px rgba(0,0,0,0.8),
+  0 0 6px #FFD700,
+  0 0 12px #FFD700,
+  0 0 20px rgba(255, 215, 0, 0.8)
 }
 
-.option span:hover {
+.wordset-option input[type="radio"] {
+  display: none;
+}
+
+.wordset-option span {
+  display: inline-block;
+  margin: 10px 20px;
+  font-size: 35px;
+  color: #eee;
+  cursor: pointer;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+  transition: transform 0.2s ease, text-shadow 0.2s ease, color 0.2s ease;
+}
+
+.wordset-option span:hover {
   color: #FFD700;
   text-shadow:
-    0 0 9px #FFD700;
+    0 0 10px rgba(0,0,0,0.8),
+    0 0 6px #FFD700,
+    0 0 12px #FFD700;
+}
+
+.wordset-option input[type="radio"]:checked + span {
+  color: #FFD700;
+  transform: scale(1.12);
+  text-shadow:
+  0 0 7px rgba(0,0,0,0.8),
+  0 0 6px #FFD700,
+  0 0 12px #FFD700,
+  0 0 20px rgba(255, 215, 0, 0.8)
 }
 
 p.difficulty {
@@ -96,6 +131,18 @@ p.difficulty {
 
 p.difficulty strong {
   font-weight: bold;
+}
+
+p.wordset {text-align: center;
+  font-size: 50px;                 
+  margin-top: 10px;                
+  margin-bottom: 30px;         
+  font-weight: bold;
+  color: #fff;                      
+  text-shadow:
+    0 0 10px rgba(0,0,0,0.8),     
+    0 0 15px rgba(0,0,0,0.7),
+    0 0 20px rgba(0,0,0,0.6);
 }
 
 /* --- Menu --- */
@@ -113,11 +160,11 @@ button {
   padding: 10px 20px;
   font-size: 18px;
   border: none;
-  border-radius: 50px; /* optional, for rounded buttons */
-  background-color: #111; /* base button color */
+  border-radius: 50px;
+  background-color: #111; 
   color: #fff;
   cursor: pointer;
-  overflow: visible; /* ensures the ::after doesn’t spill outside */
+  overflow: visible; 
 }
 
 button::after {
@@ -321,8 +368,6 @@ button:hover::after {
   }
 }
 
-
-
 /* --- Result Text --- */
 #result {
   font-size: 28px;
@@ -333,7 +378,6 @@ button:hover::after {
 .tooltip {
   position: relative;
   cursor: help;
-  text-decoration: underline dotted;
 }
 
 .tooltip-text {
