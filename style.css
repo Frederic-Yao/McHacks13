@@ -67,7 +67,7 @@ h1 {
   bottom: 10px;
   left: 10px;
   height: 100px; /* Adjust to sprite size */
-  z-index: 20;
+  z-index: 3;
 }
 
 #charRight {
@@ -75,7 +75,7 @@ h1 {
   bottom: 10px;
   right: 10px;
   height: 100px; /* Adjust to sprite size */
-  z-index: 20;
+  z-index: 3;
 }
 
 /* Beams */
@@ -97,7 +97,7 @@ h1 {
   left: 110px;  
   
   width: 0px; 
-  z-index: 5;
+  z-index: 4;
 }
 
 #beamRight {
@@ -116,7 +116,7 @@ h1 {
   right: 110px; 
   
   width: 0px; 
-  z-index: 5;
+  z-index: 4;
 }
 
 /* The Clash Explosion */
@@ -125,17 +125,12 @@ h1 {
   /* Size: Needs to be slightly larger than the 90px beams to cover the seam */
   width: 130px; 
   height: 100px;
-  
-  /* Centering Logic */
-  /* We want the center of the explosion (65px) to line up with the center of the beams. */
-  /* Your beams start at top: 46px and are 90px tall. Their center is ~91px. */
-  /* So: 91px (beam center) - 65px (half explosion) = 26px */
   top: 40px; 
   
   left: 570px; /* JS controls this */
   transform: translateX(-50%); /* Keeps the image centered on the coordinate */
   
-  z-index: 10; /* Ensures it sits on top of the beams */
+  z-index: 5; /* Ensures it sits on top of the beams */
   
   /* Keep the pixel art sharp */
   image-rendering: pixelated; 
