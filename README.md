@@ -116,10 +116,10 @@ This makes the logic easier to reason about and modify.
 
 ```
 .
-├── index.html        # Main HTML entry point
-├── style.css         # All styles and animations
-├── script.js         # Game logic and computer behavior
-├── images/           # Game assets
+├── index.html     
+├── style.css         
+├── script.js         
+├── images/           
 │   ├── background3.mp4
 │   ├── battlefield.png
 │   ├── computer_no_spell.gif
