@@ -3,21 +3,20 @@
     src: url("harry_p/HARRYP__.ttf") format("truetype");
 }
 
-body, h1, h2, h3, p, label, button {
-    font-family: "HarryP", Arial, sans-serif;
+body, button {
+  font-family: "HarryP", Arial, sans-serif;
 }
 
 #currentWord, #upcomingWords, #typingInput {
     font-family: Arial, sans-serif; /* fallback / readable font */
 }
 
-body, h1, p {
-  color: #ccc; /* or keep your golden header color if needed */
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* soft white glow */
-}
-
 body, h1, h2, h3, p, label {
-  text-shadow: 0 0 5px rgba(0,0,0,0.7); /* subtle shadow for readability */
+  color: #fff;
+  text-shadow:
+    0 0 10px rgba(0,0,0,0.8),
+    0 0 15px rgba(0,0,0,0.7),
+    0 0 20px rgba(0,0,0,0.6);
 }
 
 body {
@@ -60,11 +59,38 @@ h1 {
   z-index: 1000;
 }
 
+.option input[type="radio"] {
+  display: none;
+}
+
+.option span {
+  display: inline-block;
+  margin: 10px 20px;
+  font-size: 56px;
+  color: #eee;
+  cursor: pointer;
+  transition: transform 0.2s ease, text-shadow 0.2s ease, color 0.2s ease;
+}
+
+.option input[type="radio"]:checked + span {
+  color: #FFD700;
+  transform: scale(1.12);
+  text-shadow:
+    0 0 4px rgba(255, 215, 0, 0.8),
+    0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.option span:hover {
+  color: #FFD700;
+  text-shadow:
+    0 0 9px #FFD700;
+}
+
 p.difficulty {
   text-align: center;
   font-size: 50px;
   margin-top: 0px;
-  margin-bottom: 100px;
+  margin-bottom: 40px;
   font-weight: normal;
 }
 
@@ -82,6 +108,38 @@ p.difficulty strong {
   margin: 0 10px;
 }
 
+button {
+  position: relative;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 50px; /* optional, for rounded buttons */
+  background-color: #111; /* base button color */
+  color: #fff;
+  cursor: pointer;
+  overflow: visible; /* ensures the ::after doesn’t spill outside */
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: -0.4rem;
+  border-radius: 1000px;
+  background-image: linear-gradient(to bottom right, #00bfff, #ff00ff);
+  z-index: -1;
+
+  opacity: 0.3;          /* 👈 base state */
+  filter: blur(6px);     /* 👈 base glow */
+  transition: all 0.3s ease;
+}
+
+button:hover::after {
+  opacity: 1;
+  filter: blur(18px);
+  animation: pulseGlow 1.2s infinite alternate;
+}
+
 #menu button {
   margin-top: 20px;
   font-size: 28px;        /* bigger text */
@@ -89,8 +147,6 @@ p.difficulty strong {
   cursor: pointer;
   border-radius: 8px;     /* optional: rounded corners */
 }
-
-
 
 /* --- BATTLEFIELD (Replaces Rope) --- */
 #battlefield {
