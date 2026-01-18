@@ -53,11 +53,13 @@ p.difficulty strong {
 }
 
 #menu button {
-  margin-top: 15px;
-  font-size: px23;
-  padding: 8px 16px;
+  margin-top: 20px;
+  font-size: 28px;        /* bigger text */
+  padding: 12px 24px;     /* bigger clickable area */
   cursor: pointer;
+  border-radius: 8px;     /* optional: rounded corners */
 }
+
 
 
 /* --- BATTLEFIELD (Replaces Rope) --- */
@@ -81,7 +83,7 @@ p.difficulty strong {
   bottom: 10px;
   left: 10px;
   height: 100px; /* Adjust to sprite size */
-  z-index: 10;
+  z-index: 20;
 }
 
 #charRight {
@@ -89,7 +91,7 @@ p.difficulty strong {
   bottom: 10px;
   right: 10px;
   height: 100px; /* Adjust to sprite size */
-  z-index: 10;
+  z-index: 20;
 }
 
 /* Beams */
@@ -149,7 +151,7 @@ p.difficulty strong {
   left: 570px; /* JS controls this */
   transform: translateX(-50%); /* Keeps the image centered on the coordinate */
   
-  z-index: 100; /* Ensures it sits on top of the beams */
+  z-index: 10; /* Ensures it sits on top of the beams */
   
   /* Keep the pixel art sharp */
   image-rendering: pixelated; 
@@ -265,3 +267,16 @@ p.difficulty strong {
   from { transform: translateX(-50%) scale(1); }
   to { transform: translateX(-50%) scale(1.2); }
 }
+
+.hidden-during-countdown {
+  display: none !important;
+}
+
+#endButtons button {
+  font-size: 36px;      /* bigger text */
+  padding: 20px 40px;   /* bigger clickable area */
+  margin: 0 20px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+

@@ -36,7 +36,7 @@ window.addEventListener("DOMContentLoaded", () => {
   };
 
   // --- Word banks ---
-const NORMAL_WORDS = [
+  const NORMAL_WORDS = [
 "apple","banana","orange","grape","strawberry","watermelon","kiwi","blueberry","pineapple","mango",
 "pear","peach","plum","apricot","cherry","fig","lime","lemon","coconut","papaya",
 "avocado","melon","raspberry","blackberry","pomegranate","grapefruit","tangerine","nectarine","date","guava",
@@ -140,6 +140,7 @@ const HARRY_POTTER_WORDS = [
 "tusk","twilight","vial","vine","viper","wand","watch","web","wing","wolf",
 "wyrm","yew","zephyr","zombie"
 ];
+
   // --- Helpers ---
   function randomWord() {
     const bank = currentWordSet === "normal" ? NORMAL_WORDS : HARRY_POTTER_WORDS;
@@ -229,26 +230,26 @@ const HARRY_POTTER_WORDS = [
   // --- Rope & Beams ---
   function moveRope(amount) {
     ropePosition += amount;
-    ropePosition = Math.max(0, Math.min(650, ropePosition));
+    ropePosition = Math.max(50, Math.min(650, ropePosition));
     updateVisuals();
 
-    if (ropePosition === 0) endGame("Computer wins!");
-    if (ropePosition === 650) endGame("You win!");
+    if (ropePosition <= 50) {
+      endGame("Computer wins!");
+    }
+    if (ropePosition >= 650) {
+    endGame("You win!");
+    }
   }
 
   function updateVisuals() {
     clashPoint.style.left = ropePosition + "px";
 
-  // 2. Define Offsets (MUST MATCH CSS 'left' and 'right' of beams)
-  const leftWandOffset = 110;  // Matches CSS #beamLeft { left: 80px }
-  const rightWandOffset = 110; // Matches CSS #beamRight { right: 80px }
-  const containerWidth = 700; // Matches CSS #gameContainer { width: 700px }
+    const leftWandOffset = 110;
+    const rightWandOffset = 110;
+    const containerWidth = 700;
 
-  // 3. Calculate Left Beam Width
-  // Distance from Left Wand -> Clash Point
-  let leftWidth = ropePosition - leftWandOffset;
-  if (leftWidth < 0) leftWidth = 0;
-  beamLeft.style.width = leftWidth + "px";
+    let leftWidth = ropePosition - leftWandOffset;
+    beamLeft.style.width = Math.max(0, leftWidth) + "px";
 
     let rightWidth = (containerWidth - ropePosition) - rightWandOffset;
     beamRight.style.width = Math.max(0, rightWidth) + "px";
@@ -283,23 +284,108 @@ const HARRY_POTTER_WORDS = [
   function endGame(message) {
     gameOver = true;
     result.textContent = message;
+
+    // Stop the computer
     clearInterval(computerInterval);
-    setTimeout(() => {
-      menu.style.display = "block";
-      gameContainer.style.display = "none";
+
+    // Hide typing elements
+    wordsRow.style.display = "none";
+    input.style.display = "none";
+
+    // Optionally hide battlefield beams/clash
+    beamLeft.classList.add("hidden-during-countdown");
+    beamRight.classList.add("hidden-during-countdown");
+    clashPoint.classList.add("hidden-during-countdown");
+
+    // Show end buttons
+    const endButtons = document.getElementById("endButtons");
+    endButtons.style.display = "flex"; // use flex for nicer spacing
+    endButtons.style.justifyContent = "center";
+    endButtons.style.marginTop = "30px";
+
+    // Play Again button
+    const playAgainBtn = document.getElementById("playAgainBtn");
+    playAgainBtn.onclick = () => {
+      endButtons.style.display = "none";
       result.textContent = "";
-    }, 1500);
+
+      // Show battlefield beams/clash again
+      beamLeft.classList.remove("hidden-during-countdown");
+      beamRight.classList.remove("hidden-during-countdown");
+      clashPoint.classList.remove("hidden-during-countdown");
+
+      resetGame(); // restart game with same settings
+      input.focus();
+    };
+
+    // Main Menu button
+    const mainMenuBtn = document.getElementById("mainMenuBtn");
+    mainMenuBtn.onclick = () => {
+      endButtons.style.display = "none";
+      gameContainer.style.display = "none";
+      menu.style.display = "block";
+      result.textContent = "";
+
+      // Show battlefield beams/clash again for next game
+      beamLeft.classList.remove("hidden-during-countdown");
+      beamRight.classList.remove("hidden-during-countdown");
+      clashPoint.classList.remove("hidden-during-countdown");
+    };
+  }
+
+  // --- Countdown function ---
+  function startCountdown(callback) {
+    const countdownEl = document.getElementById("countdown");
+    countdownEl.style.display = "block"; // show countdown
+    let count = 3; // start from 3
+    countdownEl.textContent = count;
+
+    const interval = setInterval(() => {
+      count--;
+      if (count > 0) {
+        countdownEl.textContent = count;
+      } else {
+        clearInterval(interval);
+        countdownEl.style.display = "none"; // hide countdown
+        if (callback) callback(); // start the game
+      }
+    }, 1000); // 1 second per number
   }
 
   // --- Start button ---
   startBtn.addEventListener("click", () => {
     currentDifficulty = document.querySelector('input[name="difficulty"]:checked').value;
     currentWordSet = document.querySelector('input[name="wordset"]:checked').value;
+
     menu.style.display = "none";
     gameContainer.style.display = "flex";
-    resetGame();
-    input.focus();
+    // Hide typing game elements initially
+    wordsRow.style.display = "none";
+    input.style.display = "none";
+
+    // Hide beams and clash point
+    beamLeft.classList.add("hidden-during-countdown");
+    beamRight.classList.add("hidden-during-countdown");
+    clashPoint.classList.add("hidden-during-countdown");
+
+    // Start countdown
+    startCountdown(() => {
+      // After countdown ends, show typing game
+      wordsRow.style.display = "block";
+      input.style.display = "block";
+
+      // Show battlefield elements
+      beamLeft.classList.remove("hidden-during-countdown");
+      beamRight.classList.remove("hidden-during-countdown");
+      clashPoint.classList.remove("hidden-during-countdown");
+
+      resetGame();
+      input.focus();
+    });
   });
+
+
+
 
   // --- Reset game ---
   function resetGame() {

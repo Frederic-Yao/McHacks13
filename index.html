@@ -50,6 +50,10 @@
   <!-- GAME -->
   <div id="gameContainer" style="display:none;">
     
+    <!-- Countdown -->
+    <div id="countdown" style="display:none; font-size: 100px; font-weight: bold; text-align: center; margin-bottom: 30px;"></div>
+
+
     <div id="battlefield">
       <img id="charLeft" src="player.png" alt="Player">
       
@@ -57,7 +61,7 @@
       
       <div id="beamLeft"></div>
       <div id="beamRight"></div>
-      <img id="clashPoint" src="clash.png" alt="Clash">
+      <img id="clashPoint" src="clash.gif" alt="Clash Animation">
       
     </div>
 
@@ -74,6 +78,11 @@
     />
 
     <p id="result"></p>
+    <div id="endButtons" style="display:none; margin-top: 20px;">
+      <button id="playAgainBtn">Play Again</button>
+      <button id="mainMenuBtn">Main Menu</button>
+    </div>
+
   </div>
 
   <script src="script.js"></script>
