@@ -35,7 +35,7 @@ guessing how well they are doing — the battlefield itself shows it.
 6. The computer applies constant opposing pressure
 7. The duel ends when one side is overpowered
 
-<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/791e285e-debf-4243-87c3-d8cb44a734c3" />
+![In-Game Image 1](images/readme_image_1.png)
 
 Each step feeds cleanly into the next, creating a loop that feels continuous rather than segmented.
 
@@ -51,7 +51,7 @@ helps players adjust quickly instead of waiting until the end of a word.
 Only completed and correctly typed words provide an advantage. Mistakes do 
 not push the spell forward, while the computer continues to apply pressure in real time.
 
-<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/68d4384f-abbf-454b-8f32-d120e9cf5df1" />
+![In-Game Image 2](images/readme_image_2.png)
 
 
 ---
@@ -195,3 +195,7 @@ Inspired by classic typing games and magical duel mechanics.
 ## 12. License
 
 This project is intended for educational and personal use. You are free to study, modify, and build upon the code.
+
+Here is a preview of the gameplay, enjoy!
+[Watch Gameplay Video](images/gameplay_video.mp4)
+
