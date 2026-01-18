@@ -19,7 +19,7 @@ body, h1, p {
 body {
   margin: 0;
   height: 100vh;
-  background-image: url("./images/background.jpg");
+  background-image: url("./hogwarts-castle-night-sky-desktop-wallpaper-preview (1).jpg");
   background-size: cover;        
   background-position: center;   
   background-repeat: no-repeat; 
@@ -234,7 +234,7 @@ p.difficulty strong {
 
 /* --- Letter Styles --- */
 .correct {
-  color: green;
+  color: rgb(41, 141, 207);
 }
 
 .incorrect {
@@ -242,7 +242,7 @@ p.difficulty strong {
 }
 
 .remaining {
-  color: black;
+  color: white;
 }
 
 /* --- Cursor --- */
