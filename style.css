@@ -3,18 +3,14 @@
     src: url("harry_p/HARRYP__.ttf") format("truetype");
 }
 
-
-/*Harry Potter style font*/
 body, button {
   font-family: "HarryP", Arial, sans-serif;
 }
 
-/*Used font to display text and type*/
-#currentWord, #upcomingWords, #typing-input {
+#currentWord, #upcomingWords, #typingInput {
     font-family: Arial, sans-serif; /* fallback / readable font */
 }
 
-/*add text shadow*/
 body, h1, h2, h3, p, label {
   color: #fff;
   text-shadow:
@@ -23,7 +19,6 @@ body, h1, h2, h3, p, label {
     0 0 20px rgba(0,0,0,0.6);
 }
 
-/*Display settings of the whole page*/
 body {
   margin: 0;
   height: 100vh;
@@ -39,7 +34,6 @@ body {
   justify-content: center;
 }
 
-/*Customize title Type Casting War*/
 h1 {
   position: fixed;
   top: 0;
@@ -61,10 +55,12 @@ h1 {
   margin: 0;
   padding: 20px 0;
   z-index: 1000;
-  font-weight: normal;
 }
 
-/*Display different difficulties when unselected*/
+.option input[type="radio"] {
+  display: none;
+}
+
 .option span {
   display: inline-block;
   margin: 10px 20px;
@@ -75,7 +71,6 @@ h1 {
   transition: transform 0.2s ease, text-shadow 0.2s ease, color 0.2s ease;
 }
 
-/*Hover effect*/
 .option span:hover {
   color: #FFD700;
   text-shadow:
@@ -84,7 +79,6 @@ h1 {
     0 0 12px #FFD700;
 }
 
-/*Display difficulty when selected*/
 .option input[type="radio"]:checked + span {
   color: #FFD700;
   transform: scale(1.12) !important;
@@ -95,13 +89,13 @@ h1 {
   0 0 20px rgba(255, 215, 0, 0.8)
 }
 
-/*Position word choice since one option is shorter than the other*/
+.wordset-option input[type="radio"] {
+  display: none;
+}
 .wordset-option {
   position: relative;
   left: 30px; /* fine-tune */
 }
-
-/*Display two different banks of words*/
 .wordset-option span {
   display: inline-block;
   margin: 10px 20px;
@@ -112,7 +106,6 @@ h1 {
   transition: transform 0.2s ease, text-shadow 0.2s ease, color 0.2s ease;
 }
 
-/*Hover effect on word banks*/
 .wordset-option span:hover {
   color: #FFD700;
   text-shadow:
@@ -121,7 +114,6 @@ h1 {
     0 0 12px #FFD700;
 }
 
-/*Word bank option when selected*/
 .wordset-option input[type="radio"]:checked + span {
   color: #FFD700;
   transform: scale(1.12) !important;
@@ -137,8 +129,12 @@ p.difficulty {
   font-size: 50px;
   margin-top: 0px;
   margin-bottom: 40px;
+  font-weight: normal;
 }
 
+p.difficulty strong {
+  font-weight: bold;
+}
 
 p.wordset {text-align: center;
   font-size: 50px;                 
@@ -234,7 +230,7 @@ button:hover::after {
 
 
 /* Characters */
-#char-left {
+#charLeft {
   position: absolute;
   bottom: 10px;
   left: 10px;
@@ -242,7 +238,7 @@ button:hover::after {
   z-index: 3;
 }
 
-#char-right {
+#charRight {
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -281,11 +277,11 @@ button:hover::after {
 }
 
 /* Position over characters */
-#explosion-left {
+#explosionLeft {
   left: 10px;   /* same as charLeft */
 }
 
-#explosion-right {
+#explosionRight {
   right: 10px;  /* same as charRight */
 }
 
@@ -294,7 +290,7 @@ button:hover::after {
 }
 
 /* Win Animations Positioning */
-.win-anim {
+.winAnim {
   position: absolute;
   bottom: 10px;    /* Aligns with the characters' feet */
   height: 100px;
@@ -303,11 +299,11 @@ button:hover::after {
   image-rendering: pixelated;
 }
 
-#win-left {
+#winLeft {
   left: 10px;      /* Directly over the player's spot */
 }
 
-#win-right {
+#winRight {
   right: 10px;     /* Directly over the enemy's spot */
 }
 
@@ -319,7 +315,7 @@ button:hover::after {
 /* Beams */
 /* --- BEAM SETTINGS --- */
 
-#beam-left {
+#beamLeft {
   position: absolute;
   height: 90px; 
   /* Use the red beam image */
@@ -338,7 +334,7 @@ button:hover::after {
   z-index: 4;
 }
 
-#beam-right {
+#beamRight {
   position: absolute;
   height: 90px;
   /* Use the green beam image */
@@ -358,7 +354,7 @@ button:hover::after {
 }
 
 /* The Clash Explosion */
-#clash-point {
+#clashPoint {
   position: absolute;
   /* Size: Needs to be slightly larger than the 90px beams to cover the seam */
   width: 130px; 
@@ -386,7 +382,7 @@ button:hover::after {
 
 
 /* --- Words Row --- */
-#words-row {
+#wordsRow {
   width: 100%;
   margin-bottom: 20px;
   font-family: monospace;
@@ -407,7 +403,7 @@ button:hover::after {
 }
 
 /* --- Input --- */
-#typing-input {
+#typingInput {
   width: 350px;
   font-size: 20px;
   padding: 8px;
@@ -533,8 +529,8 @@ button:hover::after {
   display: none !important;
 }
 
-#end-buttons {
-  display: none;
+#endButtons {
+  display: flex;
   justify-content: center;   /* center horizontally */
   align-items: center;       /* center vertically */
   margin-top: 30px;
@@ -542,7 +538,7 @@ button:hover::after {
   width: 100%;               /* take full width of container */
 }
 
-#end-buttons button {
+#endButtons button {
   white-space: nowrap;       /* keep text on one line */
   font-size: 36px;
   padding: 20px 40px;
@@ -616,5 +612,5 @@ button:hover::after {
   font-weight: bold;
   text-align: center;
   margin-bottom: 30px;
-
+  
 }
