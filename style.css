@@ -19,7 +19,7 @@ body, h1, p {
 body {
   margin: 0;
   height: 100vh;
-  background-image: url("C:/Users/frede/OneDrive/Documents/schoolwork/McHacks13/background.jpg");
+  background-image: url("./background.jpg");
   background-size: cover;        
   background-position: center;   
   background-repeat: no-repeat; 
