@@ -148,7 +148,7 @@ const HARRY_POTTER_WORDS = [
 
   // --- Helpers ---
   function randomWord() {
-    const bank = currentWordSet === "harry" ? HARRY_POTTER_WORDS : NORMAL_WORDS;
+    const bank = currentWordSet === "normal" ? NORMAL_WORDS : HARRY_POTTER_WORDS;
     return bank[Math.floor(Math.random() * bank.length)];
   }
 
@@ -156,6 +156,7 @@ const HARRY_POTTER_WORDS = [
     return currentWordSet === "harry" ? 5 : 10;
   }
 
+  // --- Initialize first 2 lines ---
   function initLines() {
     lines = [];
     typedWords = [];
@@ -169,9 +170,11 @@ const HARRY_POTTER_WORDS = [
     updateWords();
   }
 
+  // --- Update word display ---
   function updateWords() {
     const typed = input.value;
 
+    // --- Shift lines if first line fully typed ---
     if (typedWords.length >= lines[0].length) {
       typedWords = [];
       lines.shift();
@@ -181,7 +184,7 @@ const HARRY_POTTER_WORDS = [
       input.value = "";
     }
 
-    // Render current line
+    // --- Render current line ---
     currentLineEl.innerHTML = "";
     lines[0].forEach((word, idx) => {
       if (idx < typedWords.length) {
@@ -219,7 +222,7 @@ const HARRY_POTTER_WORDS = [
       }
     });
 
-    // Render next line
+    // --- Render next line ---
     nextLineEl.innerHTML = "";
     lines[1].forEach(word => {
       const span = document.createElement("span");
@@ -235,7 +238,7 @@ const HARRY_POTTER_WORDS = [
     ropePosition = Math.max(50, Math.min(650, ropePosition));
     updateVisuals();
 
-    if (ropePosition <= 100) {
+    if (ropePosition <= 130) {
       endGame("Computer wins!");
     }
     if (ropePosition >= 650) {
@@ -282,10 +285,64 @@ const HARRY_POTTER_WORDS = [
     }, settings.speed);
   }
 
-  // --- Countdown ---
+  // --- Game flow ---
+  function endGame(message) {
+    gameOver = true;
+    result.textContent = message;
+
+    // Stop the computer
+    clearInterval(computerInterval);
+
+    // Hide typing elements
+    wordsRow.style.display = "none";
+    input.style.display = "none";
+
+    // Optionally hide battlefield beams/clash
+    beamLeft.classList.add("hidden-during-countdown");
+    beamRight.classList.add("hidden-during-countdown");
+    clashPoint.classList.add("hidden-during-countdown");
+
+    // Show end buttons
+    const endButtons = document.getElementById("endButtons");
+    endButtons.style.display = "flex"; // use flex for nicer spacing
+    endButtons.style.justifyContent = "center";
+    endButtons.style.marginTop = "30px";
+
+    // Play Again button
+    const playAgainBtn = document.getElementById("playAgainBtn");
+    playAgainBtn.onclick = () => {
+      endButtons.style.display = "none";
+      result.textContent = "";
+
+      // Show battlefield beams/clash again
+      beamLeft.classList.remove("hidden-during-countdown");
+      beamRight.classList.remove("hidden-during-countdown");
+      clashPoint.classList.remove("hidden-during-countdown");
+
+      resetGame(); // restart game with same settings
+      input.focus();
+    };
+
+    // Main Menu button
+    const mainMenuBtn = document.getElementById("mainMenuBtn");
+    mainMenuBtn.onclick = () => {
+      endButtons.style.display = "none";
+      gameContainer.style.display = "none";
+      menu.style.display = "block";
+      result.textContent = "";
+
+      // Show battlefield beams/clash again for next game
+      beamLeft.classList.remove("hidden-during-countdown");
+      beamRight.classList.remove("hidden-during-countdown");
+      clashPoint.classList.remove("hidden-during-countdown");
+    };
+  }
+
+  // --- Countdown function ---
   function startCountdown(callback) {
-    countdownEl.style.display = "block";
-    let count = 3;
+    const countdownEl = document.getElementById("countdown");
+    countdownEl.style.display = "block"; // show countdown
+    let count = 3; // start from 3
     countdownEl.textContent = count;
 
     const interval = setInterval(() => {
@@ -294,68 +351,11 @@ const HARRY_POTTER_WORDS = [
         countdownEl.textContent = count;
       } else {
         clearInterval(interval);
-        countdownEl.style.display = "none";
-        if (callback) callback();
+        countdownEl.style.display = "none"; // hide countdown
+        if (callback) callback(); // start the game
       }
-    }, 1000);
+    }, 1000); // 1 second per number
   }
-
-  // --- End game ---
-  function endGame(message) {
-    gameOver = true;
-    result.textContent = message;
-
-    clearInterval(computerInterval);
-
-    // Hide typing and battlefield beams/clash
-    wordsRow.style.display = "none";
-    input.style.display = "none";
-    beamLeft.classList.add("hidden-during-countdown");
-    beamRight.classList.add("hidden-during-countdown");
-    clashPoint.classList.add("hidden-during-countdown");
-
-    // Show end buttons
-    endButtons.style.display = "flex";
-    endButtons.style.justifyContent = "center";
-    endButtons.style.marginTop = "30px";
-  }
-
-  // --- Play Again ---
-  playAgainBtn.onclick = () => {
-    endButtons.style.display = "none";
-    result.textContent = "";
-
-    // Hide input, lines, and beams for countdown
-    wordsRow.style.display = "none";
-    input.style.display = "none";
-    beamLeft.classList.add("hidden-during-countdown");
-    beamRight.classList.add("hidden-during-countdown");
-    clashPoint.classList.add("hidden-during-countdown");
-
-    startCountdown(() => {
-      wordsRow.style.display = "block";
-      input.style.display = "block";
-      beamLeft.classList.remove("hidden-during-countdown");
-      beamRight.classList.remove("hidden-during-countdown");
-      clashPoint.classList.remove("hidden-during-countdown");
-
-      resetGame();
-      input.focus();
-    });
-  };
-
-  // --- Main Menu ---
-  mainMenuBtn.onclick = () => {
-    endButtons.style.display = "none";
-    gameContainer.style.display = "none";
-    menu.style.display = "block";
-    result.textContent = "";
-
-    // Show beams/clash for next game
-    beamLeft.classList.remove("hidden-during-countdown");
-    beamRight.classList.remove("hidden-during-countdown");
-    clashPoint.classList.remove("hidden-during-countdown");
-  };
 
   // --- Start button ---
   startBtn.addEventListener("click", () => {
@@ -364,17 +364,22 @@ const HARRY_POTTER_WORDS = [
 
     menu.style.display = "none";
     gameContainer.style.display = "flex";
-
-    // Hide typing & battlefield for countdown
+    // Hide typing game elements initially
     wordsRow.style.display = "none";
     input.style.display = "none";
+
+    // Hide beams and clash point
     beamLeft.classList.add("hidden-during-countdown");
     beamRight.classList.add("hidden-during-countdown");
     clashPoint.classList.add("hidden-during-countdown");
 
+    // Start countdown
     startCountdown(() => {
+      // After countdown ends, show typing game
       wordsRow.style.display = "block";
       input.style.display = "block";
+
+      // Show battlefield elements
       beamLeft.classList.remove("hidden-during-countdown");
       beamRight.classList.remove("hidden-during-countdown");
       clashPoint.classList.remove("hidden-during-countdown");
@@ -383,6 +388,9 @@ const HARRY_POTTER_WORDS = [
       input.focus();
     });
   });
+
+
+
 
   // --- Reset game ---
   function resetGame() {
@@ -393,7 +401,4 @@ const HARRY_POTTER_WORDS = [
     initLines();
     startComputer();
   }
-
-  // --- Initialize ---
-  initLines();
 });
