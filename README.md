@@ -197,5 +197,4 @@ Inspired by classic typing games and magical duel mechanics.
 This project is intended for educational and personal use. You are free to study, modify, and build upon the code.
 
 Here is a preview of the gameplay, enjoy!
-[Watch Gameplay Video](images/gameplay_video.mp4)
 
