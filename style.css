@@ -127,9 +127,6 @@ p.difficulty {
   margin-top: 0px;
   margin-bottom: 40px;
   font-weight: normal;
-}
-
-p.difficulty strong {
   font-weight: bold;
 }
 
@@ -217,7 +214,7 @@ button:hover::after {
 
 
 /* Characters */
-#charLeft {
+#char-left {
   position: absolute;
   bottom: 10px;
   left: 10px;
@@ -225,7 +222,7 @@ button:hover::after {
   z-index: 3;
 }
 
-#charRight {
+#char-right {
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -236,7 +233,7 @@ button:hover::after {
 /* Beams */
 /* --- BEAM SETTINGS --- */
 
-#beamLeft {
+#beam-left {
   position: absolute;
   height: 90px; 
   /* Use the red beam image */
@@ -255,7 +252,7 @@ button:hover::after {
   z-index: 4;
 }
 
-#beamRight {
+#beam-right {
   position: absolute;
   height: 90px;
   /* Use the green beam image */
@@ -275,7 +272,7 @@ button:hover::after {
 }
 
 /* The Clash Explosion */
-#clashPoint {
+#clash-point {
   position: absolute;
   /* Size: Needs to be slightly larger than the 90px beams to cover the seam */
   width: 130px; 
@@ -292,7 +289,8 @@ button:hover::after {
 }
 
 /* --- Game Container --- */
-#gameContainer {
+#game-container {
+  display: none;
   width: 95%;
   max-width: 1200px;
   display: flex;
@@ -395,6 +393,7 @@ button:hover::after {
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
+  font-style: italic;
 }
 
 .tooltip:hover .tooltip-text {
@@ -471,4 +470,12 @@ button:hover::after {
 
 #menu button {
   animation-delay: 1s;
+}
+
+#countdown {
+  display: none;           /* hidden initially */
+  font-size: 100px;        /* large text */
+  font-weight: bold;       /* bold text */
+  text-align: center;      /* center horizontally */
+  margin-bottom: 30px;     /* space below */
 }

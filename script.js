@@ -3,13 +3,13 @@ window.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("typingInput");
   const result = document.getElementById("result");
   const menu = document.getElementById("menu");
-  const startBtn = document.getElementById("startBtn");
-  const gameContainer = document.getElementById("gameContainer");
+  const startBtn = document.getElementById("start-btn");
+  const gameContainer = document.getElementById("game-container");
   const wordsRow = document.getElementById("wordsRow");
 
-  const beamLeft = document.getElementById("beamLeft");
-  const beamRight = document.getElementById("beamRight");
-  const clashPoint = document.getElementById("clashPoint");
+  const beamLeft = document.getElementById("beam-left");
+  const beamRight = document.getElementById("beam-right");
+  const clashPoint = document.getElementById("clash-point");
 
   const countdownEl = document.getElementById("countdown");
   const endButtons = document.getElementById("endButtons");
