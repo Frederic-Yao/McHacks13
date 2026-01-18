@@ -1,5 +1,6 @@
+// Using DOMContentLoaded for all functions since we want to ensure that HTML is fully loaded before accessing elements
 window.addEventListener("DOMContentLoaded", () => {
-  // --- DOM elements ---
+  // --- DOM elements, declaring variables and getting access to html elements ---
   const input = document.getElementById("typing-input");
   const result = document.getElementById("result");
   const menu = document.getElementById("menu");
@@ -33,6 +34,7 @@ window.addEventListener("DOMContentLoaded", () => {
   currentLineEl.id = "currentLine";
   const nextLineEl = document.createElement("div");
   nextLineEl.id = "nextLine";
+  // Append lines to words row (empty for now)
   wordsRow.appendChild(currentLineEl);
   wordsRow.appendChild(nextLineEl);
 
@@ -166,6 +168,7 @@ const HARRY_POTTER_WORDS = [
 ];
 
   // --- Helpers ---
+  // Get random word from current word bank
   function randomWord() {
     const bank = currentWordSet === "harry" ? HARRY_POTTER_WORDS : NORMAL_WORDS;
     return bank[Math.floor(Math.random() * bank.length)];
@@ -176,6 +179,7 @@ const HARRY_POTTER_WORDS = [
     return 5; // always 5 words per line
   }
 
+  // --- Initialize and update lines, generate  2 lines of words and updates words---
   function initLines() {
     lines = [];
     typedWords = [];
@@ -189,65 +193,128 @@ const HARRY_POTTER_WORDS = [
     updateWords();
   }
 
+  // Update word display
   function updateWords() {
     const typed = currentTyped;
 
-    if (typedWords.length >= lines[0].length) {
-      typedWords = [];
-      lines.shift();
-      const newLine = [];
-      for (let i = 0; i < getLineLength(); i++) newLine.push(randomWord());
-      lines.push(newLine);
-      input.value = "";
-    }
+    handleLineCompletion();
+    renderCurrentLine(typed);
+    renderNextLine();
+  }
 
-    // Render current line
-    currentLineEl.innerHTML = "";
+  // -------------------------
+  // Handle the end of the current line
+  // -------------------------
+  function handleLineCompletion() {
+    // Check if the current line has been fully typed
+    if (typedWords.length >= lines[0].length) {
+      typedWords = [];      // Reset typed words
+      lines.shift();        // Remove finished line
+
+      // Add a new random line at the end
+      lines.push(generateNewLine(getLineLength()));
+
+      input.value = "";     // Clear input for new line
+    }
+  }
+
+  // -------------------------
+  // Generate a new random line of words
+  // -------------------------
+  function generateNewLine(length) {
+    const newLine = [];
+    for (let i = 0; i < length; i++) {
+      newLine.push(randomWord());
+    }
+    return newLine;
+  }
+
+  // -------------------------
+  // Display the current line with correct/incorrect/remaining words and letters with colors
+  // -------------------------
+  function renderCurrentLine(typed) {
+    currentLineEl.innerHTML = ""; // Clear previous content
+    // Chooses first line of the two lines
     lines[0].forEach((word, idx) => {
       if (idx < typedWords.length) {
-        const span = document.createElement("span");
-        span.textContent = word + " ";
-        span.className = "correct";
-        currentLineEl.appendChild(span);
+        // Already typed words
+        currentLineEl.appendChild(createWordSpan(word, "correct"));
       } else if (idx === typedWords.length) {
-        const container = document.createElement("span");
-        let cursorAdded = false;
-        for (let i = 0; i < word.length; i++) {
-          if (!cursorAdded && i === typed.length) {
-            const cursor = document.createElement("span");
-            cursor.className = "cursor";
-            container.appendChild(cursor);
-            cursorAdded = true;
-          }
-          const letter = document.createElement("span");
-          letter.className = i < typed.length ? (typed[i] === word[i] ? "correct" : "incorrect") : "remaining";
-          letter.textContent = word[i];
-          container.appendChild(letter);
-        }
-        if (!cursorAdded) {
-          const cursor = document.createElement("span");
-          cursor.className = "cursor";
-          container.appendChild(cursor);
-        }
-        container.appendChild(document.createTextNode(" "));
-        currentLineEl.appendChild(container);
+        // Word currently being typed
+        currentLineEl.appendChild(createTypingWordContainer(word, typed));
       } else {
-        const span = document.createElement("span");
-        span.textContent = word + " ";
-        span.className = "remaining";
-        currentLineEl.appendChild(span);
+        // Words yet to be typed
+        currentLineEl.appendChild(createWordSpan(word, "remaining"));
       }
     });
+  }
 
-    // Render next line
-    nextLineEl.innerHTML = "";
+  // -------------------------
+  // Create a span for a single word; spans are inline, so we can easily add cursor and change words letters by letters
+  // Also assigns it to a class, whether "correct", "incorrect", or "remaining"
+  // -------------------------
+  function createWordSpan(word, className) {
+    const span = document.createElement("span");
+    span.textContent = word + " ";
+    span.className = className;
+    return span;
+  }
+
+  // -------------------------
+  // Create a container span for the word being typed
+  // -------------------------
+  function createTypingWordContainer(word, typed) {
+    const container = document.createElement("span");
+    // Flag to ensure we only add one cursor per word; resetting the cursor
+    let cursorAdded = false;
+
+    // Loop through each letter in the word
+    for (let i = 0; i < word.length; i++) {
+      // Add cursor at the current typing position
+      if (!cursorAdded && i === typed.length) {
+        container.appendChild(createCursor());
+        cursorAdded = true;
+      }
+
+      // Create span for each letter and verifies whether the word is right
+      const letter = document.createElement("span");
+      letter.className = i < typed.length 
+        ? (typed[i] === word[i] ? "correct" : "incorrect") 
+        : "remaining";
+      letter.textContent = word[i];
+      container.appendChild(letter);
+    }
+
+    // If cursor wasn't added, add it at the end (edge case)
+    if (!cursorAdded) {
+      container.appendChild(createCursor());
+    }
+
+    // Add letter span to container
+    container.appendChild(document.createTextNode(" ")); // add space after word
+    return container;
+  }
+
+  // -------------------------
+  // Create cursor span
+  // -------------------------
+  function createCursor() {
+    const cursor = document.createElement("span");
+    cursor.className = "cursor";
+    return cursor;
+  }
+
+  // -------------------------
+  // Render the next line (all remaining)
+  // -------------------------
+  function renderNextLine() {
+    nextLineEl.innerHTML = ""; // Clear previous next line
     lines[1].forEach(word => {
-      const span = document.createElement("span");
-      span.textContent = word + " ";
-      span.className = "remaining";
-      nextLineEl.appendChild(span);
+      nextLineEl.appendChild(createWordSpan(word, "remaining"));
     });
   }
+
+
   
   // Helper to Trigger Explosion
   function triggerExplosion(side) {
