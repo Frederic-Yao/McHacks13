@@ -81,11 +81,13 @@ Different word sets change the rhythm and difficulty of the game.
   - Common, everyday vocabulary
   - Shorter words
   - Beginner-friendly
+  - e.g. apple, banana, orange
 
 - **Spellbook of Words**
   - Fantasy and magic-themed terms
   - Longer and more complex words
   - Naturally increases difficulty without changing computer behavior
+  - e.g. azkaban, ollivander, wingardium
 
 All word sets are stored as JavaScript arrays, making them easy to edit or expand.
 
