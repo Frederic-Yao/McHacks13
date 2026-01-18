@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
   wordsRow.appendChild(nextLineEl);
 
   // --- Game state ---
-  let ropePosition = 325; // middle start
+  let ropePosition = 20.3125; // middle start
   let gameOver = false;
   let computerInterval;
   let typedWords = [];
@@ -51,11 +51,11 @@ window.addEventListener("DOMContentLoaded", () => {
   let startTime;
   let totalCharacters = 0;
 
-  const PLAYER_PULL = 30; // pixels per correct word
+  const PLAYER_PULL = 1.875; // pixels per correct word
   const DIFFICULTY_SETTINGS = {
-    easy:   { speed: 600, computerPull: 5 },
-    medium: { speed: 450, computerPull: 10 },
-    hard:   { speed: 300, computerPull: 20 }
+    easy:   { speed: 600, computerPull: 0.3125 },
+    medium: { speed: 450, computerPull: 0.625 },
+    hard:   { speed: 300, computerPull: 1.25 }
   };
 
 
@@ -277,26 +277,26 @@ const HARRY_POTTER_WORDS = [
   // --- Rope & Beams ---
   function moveRope(amount) {
     ropePosition += amount;
-    ropePosition = Math.max(0, Math.min(650, ropePosition));
+    ropePosition = Math.max(0, Math.min(40.625, ropePosition));
     updateVisuals();
 
-    if (ropePosition <= 130) endGame("Computer wins!", "player");
-    if (ropePosition >= 600) endGame("You win!", "computer");
+    if (ropePosition <= 8.125) endGame("Computer wins!", "player");
+    if (ropePosition >= 37.5) endGame("You win!", "computer");
 
   }
 
   function updateVisuals() {
-    clashPoint.style.left = ropePosition + "px";
+    clashPoint.style.left = ropePosition + "rem";
 
-    const leftWandOffset = 110;
-    const rightWandOffset = 110;
-    const containerWidth = 700;
+    const leftWandOffset = 6.875;
+    const rightWandOffset = 6.975;
+    const containerWidth = 43.75;
 
     let leftWidth = ropePosition - leftWandOffset;
-    beamLeft.style.width = Math.max(0, leftWidth) + "px";
+    beamLeft.style.width = Math.max(0, leftWidth) + "rem";
 
     let rightWidth = (containerWidth - ropePosition) - rightWandOffset;
-    beamRight.style.width = Math.max(0, rightWidth) + "px";
+    beamRight.style.width = Math.max(0, rightWidth) + "rem";
   }
 
   // --- Player typing ---
@@ -538,7 +538,7 @@ const HARRY_POTTER_WORDS = [
     winRight.classList.add("hidden");
 
     // 4. Reset positions and typing
-    ropePosition = 325;
+    ropePosition = 20.3125;
     updateVisuals();
     input.value = "";
     initLines();
@@ -548,4 +548,25 @@ const HARRY_POTTER_WORDS = [
   // --- Initialize ---
   initLines();
 
+});
+
+function autoScale() {
+  const targetWidth = 1000;
+  const targetHeight = 800; 
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  
+  // Math.min ensures the game fits even if the screen is too short
+  const scale = Math.min(windowWidth / targetWidth, windowHeight / targetHeight);
+  
+  // Apply the new base font size
+  document.documentElement.style.fontSize = (scale * 16) + "px";
+}
+
+// Ensure it triggers on resize and initial load
+window.addEventListener('resize', autoScale);
+window.addEventListener('DOMContentLoaded', autoScale);
+// Trigger again when Start is clicked to ensure layout is fresh
+startBtn.addEventListener('click', () => {
+    setTimeout(autoScale, 50);
 });
