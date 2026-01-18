@@ -14,6 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const countdownEl = document.getElementById("countdown");
   const endButtons = document.getElementById("endButtons");
   const mainMenuBtn = document.getElementById("mainMenuBtn");
+  const playAgainBtn = document.getElementById("playAgainBtn");
 
   const explosionLeft = document.getElementById("explosionLeft");
   const explosionRight = document.getElementById("explosionRight");
@@ -366,6 +367,30 @@ const HARRY_POTTER_WORDS = [
     endButtons.style.marginTop = "30px";
   }
 
+  playAgainBtn.onclick = () => {
+    endButtons.style.display = "none"; // hide buttons
+    wordsRow.style.display = "none";   // hide words during countdown
+    input.style.display = "none";      // hide typing during countdown
+    beamLeft.classList.add("hidden-during-countdown");
+    beamRight.classList.add("hidden-during-countdown");
+    clashPoint.classList.add("hidden-during-countdown");
+
+    result.textContent = ""; // clear previous result
+
+    startCountdown(() => {
+      // show everything back after countdown
+      wordsRow.style.display = "block";
+      input.style.display = "block";
+      beamLeft.classList.remove("hidden-during-countdown");
+      beamRight.classList.remove("hidden-during-countdown");
+      clashPoint.classList.remove("hidden-during-countdown");
+
+      resetGame();
+      input.focus();
+    });
+  };
+
+
 
   // --- Main Menu ---
   mainMenuBtn.onclick = () => {
@@ -382,6 +407,7 @@ const HARRY_POTTER_WORDS = [
     beamRight.classList.remove("hidden-during-countdown");
     clashPoint.classList.remove("hidden-during-countdown");
   };
+
 
 
   // --- Start button ---
@@ -415,11 +441,11 @@ const HARRY_POTTER_WORDS = [
   function resetGame() {
     gameOver = false;
 
-    // RESTORE CHARACTERS FIRST
+    currentTyped = "";
+
     charLeft.classList.remove("hidden");
     charRight.classList.remove("hidden");
 
-    // Hide explosions
     explosionLeft.classList.add("hidden");
     explosionRight.classList.add("hidden");
 
@@ -434,26 +460,5 @@ const HARRY_POTTER_WORDS = [
 
   // --- Initialize ---
   initLines();
-  const socket = io();
-
-
-  socket.on("init", (data) => {
-    ropePosition = data.ropePosition;
-    updateVisuals();
-    const players = Object.keys(data.players);
-    const myPlayer = players[0] === socket.id ? "left" : "right";
-  });
-
-  socket.on("updateRope", (data) => {
-    ropePosition = data.ropePosition;
-    updateVisuals();
-  });
-
-  socket.on("gameOver", (data) => {
-    alert(data.winner + " wins!");
-  });
-
-  
-
 
 });
