@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Typing Tug of War</title>
+  <title>Type Casting Duel</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <h1>Typing Tug of War</h1>
+  <h1>Type Casting Duel</h1>
 
   <!-- MENU -->
   <div id="menu">
@@ -27,11 +27,20 @@
     <p><strong>Select Word Set:</strong></p>
     <label>
       <input type="radio" name="wordset" value="normal" checked>
-      Normal Words
+      <span class="tooltip">
+      The Muggle Tongue
+      <span class="tooltip-text"><i>The everyday language of non-magical humans.
+      </i></span>
+      </span>
     </label>
     <label>
       <input type="radio" name="wordset" value="harry">
-      Harry Potter Words
+      <span class="tooltip">
+      The Spellbook of Words
+      <span class="tooltip-text">
+        <i>A magical dictionary of spells and words.<i>
+        </span>
+      </span>
     </label>
 
     <br><br>
@@ -40,8 +49,16 @@
 
   <!-- GAME -->
   <div id="gameContainer" style="display:none;">
-    <div id="ropeContainer">
-      <div id="rope"></div>
+    
+    <div id="battlefield">
+      <img id="charLeft" src="player.png" alt="Player">
+      
+      <img id="charRight" src="computer.png" alt="Enemy">
+      
+      <div id="beamLeft"></div>
+      <div id="beamRight"></div>
+      <img id="clashPoint" src="clash.png" alt="Clash">
+      
     </div>
 
     <div id="wordsRow">

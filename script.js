@@ -130,24 +130,40 @@ function updateWords() {
   if (cursor) cursor.scrollIntoView({ behavior: "smooth", inline: "nearest" });
 }
 
-// --- Rope ---
-function updateRopePosition() {
-  const container = document.getElementById("ropeContainer");
-  const containerWidth = container.offsetWidth;
-  const ropeWidth = rope.offsetWidth;
-  const leftPx = (ropePercent / 100) * (containerWidth - ropeWidth);
-  rope.style.left = leftPx + "px";
-  if (ropePercent <= 0) endGame("Computer wins!");
-  if (ropePercent >= 100) endGame("You win!");
-}
-function moveRope(amountPercent) {
-  ropePercent += amountPercent;
-  if (ropePercent < 0) ropePercent = 0;
-  if (ropePercent > 100) ropePercent = 100;
-  updateRopePosition();
+function moveRope(amount) {
+  ropePosition += amount;
+  ropePosition = Math.max(0, Math.min(650, ropePosition));
+
+  // Call our new visual updater
+  updateVisuals();
+
+  if (ropePosition === 0) endGame("Computer wins!");
+  if (ropePosition === 650) endGame("You win!");
 }
 
-// --- Player typing ---
+function updateVisuals() {
+  // 1. Move the Clash Point
+  clashPoint.style.left = ropePosition + "px";
+
+  // 2. Define Offsets (MUST MATCH CSS 'left' and 'right' of beams)
+  const leftWandOffset = 110;  // Matches CSS #beamLeft { left: 80px }
+  const rightWandOffset = 110; // Matches CSS #beamRight { right: 80px }
+  const containerWidth = 700; // Matches CSS #gameContainer { width: 700px }
+
+  // 3. Calculate Left Beam Width
+  // Distance from Left Wand -> Clash Point
+  let leftWidth = ropePosition - leftWandOffset;
+  if (leftWidth < 0) leftWidth = 0;
+  beamLeft.style.width = leftWidth + "px";
+
+  // 4. Calculate Right Beam Width
+  // Distance from Right Wand -> Clash Point
+  let rightWidth = (containerWidth - ropePosition) - rightWandOffset;
+  if (rightWidth < 0) rightWidth = 0;
+  beamRight.style.width = rightWidth + "px";
+}
+
+/* --- Player Input --- */
 input.addEventListener("input", () => {
   if (gameOver) return;
   updateWords();
@@ -197,8 +213,11 @@ startBtn.addEventListener("click", () => {
 // --- Reset game ---
 function resetGame() {
   gameOver = false;
-  ropePercent = 50;
-  updateRopePosition();
+  ropePosition = 325;
+  
+  // Update the new visuals instead of rope.style.left
+  updateVisuals(); 
+  
   input.value = "";
   initLines();
   startComputer();
