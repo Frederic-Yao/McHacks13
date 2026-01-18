@@ -81,7 +81,7 @@ h1 {
 
 .option input[type="radio"]:checked + span {
   color: #FFD700;
-  transform: scale(1.12);
+  transform: translateY(0) scale(1.12) !important;
   text-shadow:
   0 0 7px rgba(0,0,0,0.8),
   0 0 6px #FFD700,
@@ -113,7 +113,7 @@ h1 {
 
 .wordset-option input[type="radio"]:checked + span {
   color: #FFD700;
-  transform: scale(1.12);
+  transform: translateY(0) scale(1.12) !important;
   text-shadow:
   0 0 7px rgba(0,0,0,0.8),
   0 0 6px #FFD700,
@@ -121,28 +121,31 @@ h1 {
   0 0 20px rgba(255, 215, 0, 0.8)
 }
 
-p.difficulty {
+
+p.difficulty, p.wordset {
   text-align: center;
-  font-size: 50px;
-  margin-top: 0px;
-  margin-bottom: 40px;
-  font-weight: normal;
-}
-
-p.difficulty strong {
-  font-weight: bold;
-}
-
-p.wordset {text-align: center;
-  font-size: 50px;                 
-  margin-top: 10px;                
-  margin-bottom: 30px;         
-  font-weight: bold;
-  color: #fff;                      
+  font-family: "HarryP", serif;
+  font-size: 32px;           /* Smaller than the options (56px) */
+  color: #bdc3c7;            /* A silver/grey color so it doesn't compete with the Gold */
+  letter-spacing: 4px;       /* Spaced out letters look more "premium" */
+  text-transform: uppercase; /* Makes it feel like a formal menu label */
+  margin-bottom: 10px;       /* Bring it closer to the options */
+  
+  /* Subtle glow that is different from the gold options */
   text-shadow:
     0 0 10px rgba(0,0,0,0.8),     
     0 0 15px rgba(0,0,0,0.7),
-    0 0 20px rgba(0,0,0,0.6);
+    0 0 20px rgba(0,0,0,0.6);; 
+}
+
+p.difficulty::after, p.wordset::after {
+  content: "";
+  display: block;
+  width: 190px;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #FFD700, transparent);
+  margin: 5px auto 0;
+  opacity: 0.6;
 }
 
 /* --- Menu --- */
@@ -186,6 +189,7 @@ button:hover::after {
   filter: blur(18px);
   animation: pulseGlow 1.2s infinite alternate;
 }
+
 
 #menu button {
   margin-top: 20px;
