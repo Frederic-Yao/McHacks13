@@ -230,11 +230,15 @@ const HARRY_POTTER_WORDS = [
   // --- Rope & Beams ---
   function moveRope(amount) {
     ropePosition += amount;
-    ropePosition = Math.max(0, Math.min(650, ropePosition));
+    ropePosition = Math.max(50, Math.min(650, ropePosition));
     updateVisuals();
 
-    if (ropePosition === 0) endGame("Computer wins!");
-    if (ropePosition === 650) endGame("You win!");
+    if (ropePosition <= 50) {
+      endGame("Computer wins!");
+    }
+    if (ropePosition >= 650) {
+    endGame("You win!");
+    }
   }
 
   function updateVisuals() {
