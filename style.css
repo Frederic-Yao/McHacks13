@@ -104,7 +104,12 @@ p.difficulty {
   font-size: 56px;
   color: #eee;
   cursor: pointer;
-  text-shadow: 0 0 20px rgba(0,0,0,1);
+  text-shadow:
+    0 0 10px rgba(0,0,0,0.7),
+    0 0 20px rgba(0,0,0,0.5),
+    0 0 30px rgb(0, 0, 0),
+    0 0 40px rgb(0, 0, 0),
+    0 0 60px rgb(0, 0, 0);
   transition: transform 0.2s ease, text-shadow 0.2s ease, color 0.2s ease;
 }
 
@@ -160,7 +165,12 @@ p.wordset {
   font-size: 40px;
   color: #eee;
   cursor: pointer;
-  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+  text-shadow:
+    0 0 10px rgba(0,0,0,0.7),
+    0 0 20px rgba(0,0,0,0.5),
+    0 0 30px rgb(0, 0, 0.5),
+    0 0 40px rgb(0, 0, 0.5),
+    0 0 60px rgb(0, 0, 0.5);
   transition: transform 0.2s ease, text-shadow 0.2s ease, color 0.2s ease;
 }
 
