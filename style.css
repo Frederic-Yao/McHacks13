@@ -199,28 +199,21 @@ button:hover::after {
 #battlefield {
   width: 700px;
   height: 150px;
-  position: relative;
-  margin-bottom: 30px;
+  position: absolute;      /* fix it relative to the page */
+  top: 125px;              /* adjust vertical position */
+  left: 50%;               /* center horizontally */
+  transform: translateX(-50%);
+  z-index: 10;             /* make sure it’s above background */
   
-  /* 2. Add your image */
   background-image: url('./images/battlefield.png'); 
-  
-  /* 3. Scale Logic: 'cover' fills the box without squishing */
   background-size: cover;
-  
-  /* 4. Positioning: 'bottom center' shows the ground/graves. 
-     Change to 'center' if you want to see more of the castle/sky. */
   background-position: bottom center;
-  
-  /* 5. Keep Pixel Art Sharp */
-  image-rendering: pixelated; 
-  
-  /* Keep your border/radius */
+  image-rendering: pixelated;
   border-radius: 10px;
   overflow: hidden;
   border: 2px solid #444;
-  flex-shrink: 0;
 }
+
 
 
 /* Characters */
@@ -372,8 +365,13 @@ button:hover::after {
   font-size: 100px;
   font-weight: bold;
   margin-top: 20px;
-  margin-bottom: 0px
+  margin-bottom: 0px;
+
+  white-space: nowrap;      /* prevents line breaks */
+  text-align: center;       /* centers text */
+  overflow: hidden;         /* optional, prevents overflowing container */
 }
+
 
 .tooltip {
   position: relative;
