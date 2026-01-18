@@ -230,7 +230,7 @@ button:hover::after {
 
 
 /* Characters */
-#charLeft {
+#char-left {
   position: absolute;
   bottom: 10px;
   left: 10px;
@@ -238,7 +238,7 @@ button:hover::after {
   z-index: 3;
 }
 
-#charRight {
+#char-right {
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -258,11 +258,11 @@ button:hover::after {
 }
 
 /* Position over characters */
-#explosionLeft {
+#explosion-left {
   left: 10px;   /* same as charLeft */
 }
 
-#explosionRight {
+#explosion-right {
   right: 10px;  /* same as charRight */
 }
 
@@ -271,7 +271,7 @@ button:hover::after {
 }
 
 /* Win Animations Positioning */
-.winAnim {
+.win-anim {
   position: absolute;
   bottom: 10px;    /* Aligns with the characters' feet */
   height: 100px;
@@ -280,11 +280,11 @@ button:hover::after {
   image-rendering: pixelated;
 }
 
-#winLeft {
+#win-left {
   left: 10px;      /* Directly over the player's spot */
 }
 
-#winRight {
+#win-right {
   right: 10px;     /* Directly over the enemy's spot */
 }
 
@@ -296,7 +296,7 @@ button:hover::after {
 /* Beams */
 /* --- BEAM SETTINGS --- */
 
-#beamLeft {
+#beam-left {
   position: absolute;
   height: 90px; 
   /* Use the red beam image */
@@ -315,7 +315,7 @@ button:hover::after {
   z-index: 4;
 }
 
-#beamRight {
+#beam-right {
   position: absolute;
   height: 90px;
   /* Use the green beam image */
@@ -335,7 +335,7 @@ button:hover::after {
 }
 
 /* The Clash Explosion */
-#clashPoint {
+#clash-point {
   position: absolute;
   /* Size: Needs to be slightly larger than the 90px beams to cover the seam */
   width: 130px; 
@@ -363,7 +363,7 @@ button:hover::after {
 
 
 /* --- Words Row --- */
-#wordsRow {
+#words-row {
   width: 100%;
   margin-bottom: 20px;
   font-family: monospace;
@@ -593,5 +593,5 @@ button:hover::after {
   font-weight: bold;
   text-align: center;
   margin-bottom: 30px;
-  
+
 }
