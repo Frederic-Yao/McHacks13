@@ -61,9 +61,10 @@ h1 {
   margin: 0;
   padding: 20px 0;
   z-index: 1000;
+  font-weight: normal;
 }
 
-/*Display different difficulties*/
+/*Display different difficulties when unselected*/
 .option span {
   display: inline-block;
   margin: 10px 20px;
@@ -74,6 +75,7 @@ h1 {
   transition: transform 0.2s ease, text-shadow 0.2s ease, color 0.2s ease;
 }
 
+/*Hover effect*/
 .option span:hover {
   color: #FFD700;
   text-shadow:
@@ -82,6 +84,7 @@ h1 {
     0 0 12px #FFD700;
 }
 
+/*Display difficulty when selected*/
 .option input[type="radio"]:checked + span {
   color: #FFD700;
   transform: scale(1.12) !important;
@@ -92,13 +95,13 @@ h1 {
   0 0 20px rgba(255, 215, 0, 0.8)
 }
 
-.wordset-option input[type="radio"] {
-  display: none;
-}
+/*Position word choice since one option is shorter than the other*/
 .wordset-option {
   position: relative;
   left: 30px; /* fine-tune */
 }
+
+/*Display two different banks of words*/
 .wordset-option span {
   display: inline-block;
   margin: 10px 20px;
@@ -109,6 +112,7 @@ h1 {
   transition: transform 0.2s ease, text-shadow 0.2s ease, color 0.2s ease;
 }
 
+/*Hover effect on word banks*/
 .wordset-option span:hover {
   color: #FFD700;
   text-shadow:
@@ -117,6 +121,7 @@ h1 {
     0 0 12px #FFD700;
 }
 
+/*Word bank option when selected*/
 .wordset-option input[type="radio"]:checked + span {
   color: #FFD700;
   transform: scale(1.12) !important;
@@ -132,12 +137,8 @@ p.difficulty {
   font-size: 50px;
   margin-top: 0px;
   margin-bottom: 40px;
-  font-weight: normal;
 }
 
-p.difficulty strong {
-  font-weight: bold;
-}
 
 p.wordset {text-align: center;
   font-size: 50px;                 
