@@ -11,8 +11,8 @@ body, h1, h2, h3, p, label, button {
     font-family: Arial, sans-serif; /* fallback / readable font */
 }
 
-body, h1, p {
-  color: #ccc; /* or keep your golden header color if needed */
+body, p, h2, h3, p, label, #currentWord, #upcomingWords {
+  color: #fff; /* or keep your golden header color if needed */
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* soft white glow */
 }
 
@@ -55,6 +55,7 @@ h1 {
   padding: 20px 0;
   z-index: 1000;
 }
+
 
 p.difficulty {
   text-align: center;
