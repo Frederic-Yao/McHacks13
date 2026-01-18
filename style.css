@@ -11,8 +11,8 @@ body, h1, h2, h3, p, label, button {
     font-family: Arial, sans-serif; /* fallback / readable font */
 }
 
-body, p, h2, h3, p, label, #currentWord, #upcomingWords {
-  color: #fff; /* or keep your golden header color if needed */
+body, h1, p {
+  color: #ccc; /* or keep your golden header color if needed */
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* soft white glow */
 }
 
@@ -56,7 +56,6 @@ h1 {
   z-index: 1000;
 }
 
-
 p.difficulty {
   text-align: center;
   font-size: 50px;
@@ -95,9 +94,6 @@ p.difficulty strong {
   height: 150px;
   position: relative;
   margin-bottom: 30px;
-  
-  /* --- NEW BACKGROUND SETTINGS --- */
-  /* 1. Remove background-color: #222; */
   
   /* 2. Add your image */
   background-image: url('./images/battlefield.png'); 
@@ -311,11 +307,10 @@ p.difficulty strong {
 }
 
 #endButtons button {
-  font-size: 36px;
-  padding: 20px 40px;
+  font-size: 36px;      /* bigger text */
+  padding: 20px 40px;   /* bigger clickable area */
   margin: 0 20px;
   cursor: pointer;
   border-radius: 8px;
 }
-
 
