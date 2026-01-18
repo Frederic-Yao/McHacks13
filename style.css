@@ -65,7 +65,7 @@ h1 {
   bottom: 10px;
   left: 10px;
   height: 100px; /* Adjust to sprite size */
-  z-index: 10;
+  z-index: 20;
 }
 
 #charRight {
@@ -73,7 +73,7 @@ h1 {
   bottom: 10px;
   right: 10px;
   height: 100px; /* Adjust to sprite size */
-  z-index: 10;
+  z-index: 20;
 }
 
 /* Beams */
@@ -133,7 +133,7 @@ h1 {
   left: 570px; /* JS controls this */
   transform: translateX(-50%); /* Keeps the image centered on the coordinate */
   
-  z-index: 100; /* Ensures it sits on top of the beams */
+  z-index: 10; /* Ensures it sits on top of the beams */
   
   /* Keep the pixel art sharp */
   image-rendering: pixelated; 
